@@ -21,22 +21,18 @@ public class PersonController {
 	@Autowired
 	RedisResource redisCache;
 	
-	 @GetMapping("/testRedis")
-	    public  @ResponseBody String testRedis(@RequestParam(value="firstname", required=false, defaultValue="Jason") String firstName,
-	    					   @RequestParam(value="lastname", required=false, defaultValue="Bourne") String lastName,
-	    					   @RequestParam(value="phone", required=false, defaultValue="000-000-000") String phone,
-	    					   @RequestParam(value="email", required=false, defaultValue="secret@gmail.com") String email ) {
+	 @PostMapping("/addName")
+	    public  @ResponseBody String addName(@RequestParam(value="firstname", required=false, defaultValue="Jason") String firstName,
+	    					   @RequestParam(value="lastname", required=false, defaultValue="Bourne") String lastName ) {
 	       
 		 redisCache.addType(firstName, lastName);
 		 return "Added Key "+ firstName + " Value "+lastName;
 	    }
 		
 	 
-	 @GetMapping("/testRedis2")
-	    public  @ResponseBody String testRedis2(@RequestParam(value="firstname", required=false, defaultValue="Jason") String firstName,
-	    					   @RequestParam(value="lastname", required=false, defaultValue="Bourne") String lastName,
-	    					   @RequestParam(value="phone", required=false, defaultValue="000-000-000") String phone,
-	    					   @RequestParam(value="email", required=false, defaultValue="secret@gmail.com") String email ) {
+	 @GetMapping("/getName")
+	    public  @ResponseBody String getName(@RequestParam(value="firstname", required=false, defaultValue="Jason") String firstName,
+	    					   @RequestParam(value="lastname", required=false, defaultValue="Bourne") String lastName) {
 	       
 		
 		 return  redisCache.getType(firstName);
